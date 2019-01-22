@@ -27,6 +27,32 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'connexion') {
+            if(isset($_POST['login']) && isset($_POST['pass'])) {
+                if(!empty($_POST['login']) && !empty($_POST['pass'])) {
+                    sessionconnect($_POST['login'], $_POST['pass']);
+                }
+                else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+            else {
+                showLogin();
+            }
+        }
+        elseif ($_GET['action'] == 'inscription'){
+            if(isset($_POST['pseudo']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmation_password'])) {
+                if(!empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirmation_password'])) {
+                    inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['confirmation_password']);
+                }
+                else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+            else {
+                showInscription();
+            }
+        }
     }
     else {
         listPosts();

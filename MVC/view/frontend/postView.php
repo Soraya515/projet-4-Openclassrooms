@@ -28,6 +28,10 @@
         ?>
             <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+            <p> <form action="reportComment.php" method="post">
+                <input type="hidden" name="comment_id" value="<?= $comment['id']?>">
+                <input type="submit" value="Signaler">
+            </form> </p>
         <?php
         }
         ?>
