@@ -7,7 +7,7 @@ require_once("model/Manager.php");
 
 class inscriptionManager extends Manager
 {
-    public function PseudoExist($pseudo)
+    public function pseudoExist($pseudo)
     {
         $db = $this->dbConnect();
         $pseudoexist = $db->prepare('SELECT id, pass, email FROM formulaire WHERE pseudo= :pseudo');
@@ -16,9 +16,7 @@ class inscriptionManager extends Manager
         return $pseudoexist;
     }
 
-
-
-    public function createaccount($pseudo,$email,$pass)
+    public function createAccount($pseudo,$email,$pass)
     {
         $password_hash = password_hash($pass);
         $db = $this->dbconnect();

@@ -52,12 +52,17 @@ try {
             else {
                 showInscription();
             }
+        } 
+        elseif ($_GET['action'] == 'adminlistsposts') {
+            adminlistsposts();
         }
     }
     else {
         listPosts();
     }
+    
 }
+
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
