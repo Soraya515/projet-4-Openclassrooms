@@ -56,6 +56,9 @@ try {
         elseif ($_GET['action'] == 'adminlistsposts') {
             adminlistsposts();
         }
+        elseif($_GET['action'] =='adminComments'){
+            adminComments();
+        }
     }
     else {
         listPosts();

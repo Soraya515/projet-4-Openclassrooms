@@ -19,6 +19,13 @@
                 <a class="navbar-brand" href="#">Administration</a>
             </ul>
         </div>
+        <ul class="nav navbar_nav ">
+
+                <li><a href="#"><span class="fas fa-home fa-2x m-2" style="color:white"></span></a></li>
+                <li><a href="#"><span class="fas fa-comments fa-2x m-2" style= "color:white"></span></a></li>
+                <li><a href="#"><span class="fas fa-sign-out-alt fa-2x m-2" style="color:white"></span></a></li>
+                
+            </ul>
 
 </nav>
 
@@ -29,6 +36,7 @@
       <th scope="col">Auteur</th>
       <th scope="col">Contenu</th>
       <th scope="col">Date de création</th>
+      <th scope="col">Modifications</th>
     </tr>
   </thead>
   <tbody>
@@ -38,7 +46,10 @@
       <td><?= $data['title'];?></td>
       <td><?= $data['content'];?></td>
       <td><?= $data['creation_date_fr'];?></td>
-
+    <td> <a href="index.php?action=admineditpost&postid=<? $data['id'];?>"><i class="fas fa-edit"></i></a>
+            <a href="index.php?action=admineditpost&postid=<? $data['id'];?>"><i class="fas fa-trash-alt"></i></a>
+    </td>
+    
     </tr>
   <?php } ?>
   </tbody>

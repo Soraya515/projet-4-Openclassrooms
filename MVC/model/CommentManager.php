@@ -39,4 +39,16 @@ class CommentManager extends Manager
 
         return $affectedLines;
     }
+
+    public function getAllcomments(){
+        $db = $this->dbconnect();
+        $allComments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments');
+        $allComments->execute(array());
+
+        return $allComments;
+
+    }
 }
+
+
+

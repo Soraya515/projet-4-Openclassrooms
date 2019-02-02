@@ -110,5 +110,12 @@ function  adminlistsposts()
 
     require('view/frontend/adminPostsview.php');
 }
+function adminComments()
+{
+    $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
+    $allComments = $commentManager->getAllComments();  
+
+    require('view/frontend/adminCommentview.php');
+}
  
 ?>
