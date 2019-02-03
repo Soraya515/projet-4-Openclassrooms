@@ -33,7 +33,9 @@
       <th scope="col">Auteur</th>
       <th scope="col">Commentaires</th>
       <th scope="col">Date de création</th>
+      <th scope="col">Signalements</th>
       <th scope="col">Modifications</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -43,6 +45,12 @@
       <td><?= $comment['author'];?></td>
       <td><?= $comment['comment'];?></td>
       <td><?= $comment['comment_date_fr'];?></td>
+      <td><?php if (array_key_exists($comment['id'], $allReportedarray)) {
+         echo $allReportedarray[$comment['id']];
+      }
+      else {
+          echo '0';
+      }?></td>
     <td> <a href="index.php?action=admineditcomment&postid=<? $comment['id'];?>"><i class="fas fa-edit"></i></a>
             <a href="index.php?action=admineditcomment&postid=<? $comment['id'];?>"><i class="fas fa-trash-alt"></i></a>
     </td>

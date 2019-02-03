@@ -115,6 +115,17 @@ function adminComments()
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
     $allComments = $commentManager->getAllComments();  
 
+    $allreported = $commentManager->getAllreportedcomment();
+    $allReportedarray =array();
+    while ($report = $allreported->fetch()){
+
+        if (array_key_exists($report['comment_id'],$allReportedarray)){
+            $allReportedarray[$report['comment_id']] += 1;
+        }
+        else{
+            $allReportedarray[$report['comment_id']] = 1;
+        }
+    }
     require('view/frontend/adminCommentview.php');
 }
  

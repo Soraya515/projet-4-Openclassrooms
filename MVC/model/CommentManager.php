@@ -46,6 +46,15 @@ class CommentManager extends Manager
         $allComments->execute(array());
 
         return $allComments;
+    }
+
+    public function getAllreportedcomment(){
+        $db = $this->dbconnect();
+        $allReportedcomments =$db->prepare('SELECT comment_id, member_id,date_report FROM reports');
+        $allReportedcomments->execute(array());
+
+        return $allReportedcomments;
+
 
     }
 }
