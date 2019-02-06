@@ -3,6 +3,8 @@
 // Chargement des classes
 require_once ('model/PostManager.php');
 require_once ('model/CommentManager.php');
+require_once ('model/SessionManager.php');
+require_once ('model/inscriptionManager.php');
 
 function listPosts()
 {
@@ -43,22 +45,19 @@ function sessionconnect($pseudo, $pass)
     $resultat = $sessionStatement->fetch();
 
     if ($resultat === false) {
-        // J'ai pas ce pseudo en base.
-        // TODO : Envoyer une erreur.
+        throw new Exception('Pseudo inconnu !');
     } else {
         $isPasswordCorrect = password_verify($pass, $resultat['pass']);
         if ($isPasswordCorrect === true) {
-
             session_start();
             $_SESSION['id'] = $resultat['id'];
             $_SESSION['pseudo'] = $pseudo;
-
+            $_SESSION['access_level'] = $resultat['access_level'];
             // L'utilisateur est reconnu, on le connecte !
-            // TODO : session_start et redirection...
+            header('Location:index.php');
         } else {
-            throw new Exception('mot de passe incorrecte !');
+            throw new Exception('mot de passe incorrect !');
             // L'utilisateur est connu, mais MdP mauvais.
-            // TODO : Envoyer une erreur.
         }
     }
 
@@ -100,7 +99,7 @@ function inscription($pseudo, $email, $pass, $confirmation_pass)
 
 function showInscription()
 {
-    require ('view/frontend/inscriptionView.php');
+    require('view/frontend/inscriptionView.php');
 }
 
 function  adminlistsposts()
@@ -128,5 +127,67 @@ function adminComments()
     }
     require('view/frontend/adminCommentview.php');
 }
- 
+ function is_Admin()
+ {
+    session_start();
+   return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 1;
+
+ }
+
+ function is_member()
+ {
+    session_start();
+    return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 2;
+ }
+
+ Function adminMembers()
+ {
+     $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+     $allMembers = $SessionManager->getAllMembers();
+    
+
+     require('view/frontend/adminMembersview.php');
+ }
+
+Function deleteMember($id)
+{
+        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+        $deleteMember = $SessionManager->deleteMember($id);
+
+        adminMembers();
+}
+
+function showUpdateMemberForm($id) {
+    $sessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+    $sessionStatement = $sessionManager->findUserById($id);
+    $resultat = $sessionStatement->fetch();
+
+    if ($resultat === false) {
+        throw new Exception('ID inconnu !');
+    } else {
+        require('view/frontend/adminUpdateMemberView.php');
+    }
+}
+
+Function updateMember($id, $pseudo, $email, $pass, $access_level)
+{
+        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+        $UpdateMember = $SessionManager->updateMember($id, $pseudo, $email, $pass, $access_level);
+
+        adminMembers();
+}
+
+Function addMember()
+{
+        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+        $addMember = $SessionManager->addMember($pseudo, $pass, $access_level);
+
+        adminMembers();
+}
+
+
+
+
+
+
 ?>

@@ -54,18 +54,77 @@ try {
             }
         } 
         elseif ($_GET['action'] == 'adminlistsposts') {
-            adminlistsposts();
+            
+            if(is_admin()){
+        
+                adminlistsposts();
+            }
+
+            else {
+                listPosts();
+            }
+    
         }
         elseif($_GET['action'] =='adminComments'){
-            adminComments();
+
+            if(is_admin()){
+        
+                adminComments();
+            }
+
+            else {
+                
+                listPosts();
+            }
+ 
+        }
+        elseif ($_GET['action'] == 'adminMembers'){
+
+            if(is_admin()){
+
+             adminMembers();
+            } else {
+                listPosts();  
+            }         
+        }
+        elseif ($_GET['action'] == 'deleteMember'){
+
+            if(is_admin() && isset($_GET['id'])){
+                deleteMember($_GET['id']);
+
+            }else {
+             listPosts();  
+            }  
+        }
+        elseif ($_GET['action'] == 'updateMemberForm') {
+            if(is_admin() && isset($_GET['id'])){
+                showUpdateMemberForm($_GET['id']);
+            }else {
+             listPosts();  
+            }  
+        }
+        elseif ($_GET['action'] == 'updateMember') {
+            if(is_admin()) {
+                if(isset($_POST['id']) && isset($_POST['pseudo']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['access_level'])) {
+                    if(!empty($_POST['id']) && !empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['access_level'])) {
+                        updateMember($_POST['id'], $_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['access_level']);
+                    }
+                    else {
+                        throw new Exception('Tous les champs ne sont pas remplis !');
+                    }
+                }
+            }
+            else {
+                listPosts();
+            }
+            
         }
     }
     else {
         listPosts();
-    }
-    
+    }   
 }
-
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
+

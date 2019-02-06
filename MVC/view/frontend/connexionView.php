@@ -10,10 +10,10 @@
 </head>
 <body>
 
-<form action="sessionview.php" method="post">
+<form action="index.php?action=connexion" method="post">
     <p>
         <input type="text" name="login" /> 
-        <input type="text" name=" password"/>
+        <input type="text" name="pass"/>
         <input type="submit" name="Connexion"/>
 
 </body>
