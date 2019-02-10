@@ -51,17 +51,14 @@
       else {
           echo '0';
       }?></td>
-    <td> <a href="index.php?action=admineditcomment&postid=<? $comment['id'];?>"><i class="fas fa-edit"></i></a>
-            <a href="index.php?action=admineditcomment&postid=<? $comment['id'];?>"><i class="fas fa-trash-alt"></i></a>
+    <td> <a href="index.php?action=updateCommentForm&id=<?= $comment['id'];?>"><i class="fas fa-edit"></i></a>
+            <a href="index.php?action=deleteComment&id=<?= $comment['id'];?>"><i class="fas fa-trash-alt"></i></a>
     </td>
     
     </tr>
   <?php } ?>
   </tbody>
 </table>
-
-
-
 
 
 

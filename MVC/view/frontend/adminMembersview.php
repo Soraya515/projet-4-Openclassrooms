@@ -36,7 +36,7 @@
       <th scope="col">modifications</th>
       </thead>
   <tbody>
-  <?php while ($member= $allMembers->fetch()){ ?>
+  <?php while ($member= $allMembers->fetch()) { ?>
     <tr>
       <th scope="row"><?= $member['id'];?></th>
       <td><?= $member['pseudo'];?></td>
@@ -46,14 +46,15 @@
 
     <td> <a href="index.php?action=updateMemberForm&id=<?= $member['id'];?>"><i class="fas fa-edit"></i></a>
             <a href="index.php?action=deleteMember&id=<?= $member['id'];?>"><i class="fas fa-trash-alt"></i></a>
+            
     </td>
-    
     </tr>
     <?php } ?>
 
   </tbody>
 </table>
 
+<a href="index.php?action=addMemberForm"><i class="fas fa-plus"></i></a>
 
 </body>
 </html>

@@ -34,12 +34,12 @@ class SessionManager extends Manager
         return $allMembers;
     }
 
-    public function addMember($pseudo, $pass, $access_level)
+    public function addMember($pseudo, $email, $pass, $access_level)
     {
         $db = $this->dbConnect();
         $password_hash = password_hash($pass, PASSWORD_DEFAULT);
-        $addMember = $db->prepare('INSERT TO members(pseudo, pass, access_level) VALUES(?, ?, ?)');
-        $affectedLines = $addMember->execute(array($pseudo, $password_hash, $access_level));
+        $addMember = $db->prepare('INSERT INTO members(pseudo, email, pass, inscription_date, access_level) VALUES(?, ?, ?, NOW(), ?)');
+        $affectedLines = $addMember->execute(array($pseudo, $email, $password_hash, $access_level));
 
         return  $affectedLines;
 

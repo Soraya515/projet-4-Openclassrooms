@@ -38,6 +38,35 @@ function addComment($postId, $author, $comment)
     }
 }
 
+function deleteComment($id)
+{
+    $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
+    $deletecomment = $commentManager->deleteComment($id);
+
+    adminComments();
+}
+function updateComment($id, $author, $comment)
+{
+    $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
+    $updatecomment = $commentManager->updateComment($id, $author, $comment);
+    
+    adminComments();
+}
+
+function showUpdatecommentsform($id) 
+{
+    $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
+    $updatecomment = $commentManager->findCommentbyid($id);
+    $resultat = $updatecomment->fetch();
+    
+    if ($resultat === false) {
+        throw new Exception('ID inconnu !');
+    } else {
+        require ('view/frontend/adminUpdateCommentView.php');
+    }
+  
+}
+
 function sessionconnect($pseudo, $pass)
 {
     $sessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
@@ -99,65 +128,65 @@ function inscription($pseudo, $email, $pass, $confirmation_pass)
 
 function showInscription()
 {
-    require('view/frontend/inscriptionView.php');
+    require ('view/frontend/inscriptionView.php');
 }
 
-function  adminlistsposts()
+function adminlistsposts()
 {
     $postManager = new \projetblogAlaska\MVC\Model\PostManager();
-    $posts = $postManager->getPosts();  
+    $posts = $postManager->getPosts();
 
-    require('view/frontend/adminPostsview.php');
+    require ('view/frontend/adminPostsview.php');
 }
+
 function adminComments()
 {
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
-    $allComments = $commentManager->getAllComments();  
+    $allComments = $commentManager->getAllComments();
 
     $allreported = $commentManager->getAllreportedcomment();
-    $allReportedarray =array();
-    while ($report = $allreported->fetch()){
+    $allReportedarray = array();
+    while ($report = $allreported->fetch()) {
 
-        if (array_key_exists($report['comment_id'],$allReportedarray)){
+        if (array_key_exists($report['comment_id'], $allReportedarray)) {
             $allReportedarray[$report['comment_id']] += 1;
-        }
-        else{
+        } else {
             $allReportedarray[$report['comment_id']] = 1;
         }
     }
-    require('view/frontend/adminCommentview.php');
+    require ('view/frontend/adminCommentview.php');
 }
- function is_Admin()
- {
+
+function is_admin()
+{
     session_start();
-   return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 1;
+    return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 1;
+}
 
- }
-
- function is_member()
- {
+function is_member()
+{
     session_start();
     return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 2;
- }
+}
 
- Function adminMembers()
- {
-     $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
-     $allMembers = $SessionManager->getAllMembers();
-    
+Function adminMembers()
+{
+    $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+    $allMembers = $SessionManager->getAllMembers();
 
-     require('view/frontend/adminMembersview.php');
- }
+    require ('view/frontend/adminMembersview.php');
+}
 
 Function deleteMember($id)
 {
-        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
-        $deleteMember = $SessionManager->deleteMember($id);
+    $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+    $deleteMember = $SessionManager->deleteMember($id);
 
-        adminMembers();
+    adminMembers();
 }
 
-function showUpdateMemberForm($id) {
+function showUpdateMemberForm($id)
+{
     $sessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
     $sessionStatement = $sessionManager->findUserById($id);
     $resultat = $sessionStatement->fetch();
@@ -165,29 +194,29 @@ function showUpdateMemberForm($id) {
     if ($resultat === false) {
         throw new Exception('ID inconnu !');
     } else {
-        require('view/frontend/adminUpdateMemberView.php');
+        require ('view/frontend/adminUpdateMemberView.php');
     }
 }
 
 Function updateMember($id, $pseudo, $email, $pass, $access_level)
 {
-        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
-        $UpdateMember = $SessionManager->updateMember($id, $pseudo, $email, $pass, $access_level);
+    $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+    $UpdateMember = $SessionManager->updateMember($id, $pseudo, $email, $pass, $access_level);
 
-        adminMembers();
+    adminMembers();
 }
 
-Function addMember()
+function showaddMemberForm()
 {
-        $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
-        $addMember = $SessionManager->addMember($pseudo, $pass, $access_level);
-
-        adminMembers();
+    require ('view/frontend/adminAddusersView.php');
 }
 
+Function addMember($pseudo, $email, $pass, $access_level)
+{
+    $SessionManager = new \projetblogAlaska\MVC\Model\SessionManager();
+    $addMembers = $SessionManager->addMember($pseudo, $email, $pass, $access_level);
 
-
-
-
+    adminMembers();
+}
 
 ?>
