@@ -47,14 +47,64 @@ try {
                     showInscription();
                 }
                 break;
-            case "adminlistsposts":
+            case "adminposts":
                 if (is_admin()) {
-                    adminlistsposts();
+                    adminPosts();
                 }
                 else {
                     listPosts();
                 }
                 break;
+                
+            case "addPost":
+                if (is_admin()) {
+                    if (isset($_POST['title']) && isset($_POST['content'])) {
+                        if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                            addPost($_POST['title'], $_POST['content']);
+                        } else {
+                            throw new Exception('Tous les champs ne sont pas remplis !');
+                        }
+                    }
+                }
+                break;
+                
+            case "deletePost":
+                if (is_admin() && isset($_GET['id'])) {
+                    deletePost($_GET['id']);
+                } else {
+                    listPosts();
+                }
+                break;
+                
+           case "updatePost":
+                if (is_admin()) {
+                    if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['content'])) {
+                        if (!empty($_POST['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+                            updatePost($_POST['id'], $_POST['title'], $_POST['content']);
+                        } else {
+                            throw new Exception('Tous les champs ne sont pas remplis !');
+                        }
+                    }
+                } else {
+                    listPosts();
+                }
+                break;
+           case "addPostForm":
+                    if (is_admin()) {
+                        showAddPostForm();
+                    } else {
+                        listPosts();
+                    }
+                    break;
+                    
+           case "updatepostForm":
+                if (is_admin()) {
+                    showUpdatePostForm($_GET['id']);
+                } else {
+                    listPosts();
+                }
+                break;
+                    
             case "adminComments":
                 if (is_admin()) {
                     adminComments();

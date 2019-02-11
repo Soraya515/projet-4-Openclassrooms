@@ -40,20 +40,21 @@
     </tr>
   </thead>
   <tbody>
-  <?php while($data = $posts->fetch()) { ?>
+  <?php while($data = $allPosts->fetch()) { ?>
     <tr>
       <th scope="row"><?= $data['id'];?></th>
       <td><?= $data['title'];?></td>
       <td><?= $data['content'];?></td>
       <td><?= $data['creation_date_fr'];?></td>
-    <td> <a href="index.php?action=admineditpost&postid=<? $data['id'];?>"><i class="fas fa-edit"></i></a>
-            <a href="index.php?action=admineditpost&postid=<? $data['id'];?>"><i class="fas fa-trash-alt"></i></a>
+    <td> <a href="index.php?action=updatepostForm&id=<?= $data['id'];?>"><i class="fas fa-edit"></i></a>
+            <a href="index.php?action=deletePost&id=<?= $data['id'];?>"><i class="fas fa-trash-alt"></i></a>
     </td>
     
     </tr>
   <?php } ?>
   </tbody>
 </table>
+<a href="index.php?action=addPostForm"><i class="fas fa-plus"></i></a>
 
 
 

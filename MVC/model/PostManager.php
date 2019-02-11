@@ -23,4 +23,42 @@ class PostManager extends Manager
 
         return $post;
     }
+    
+    
+    public function addPost($title, $content)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO posts (title, content, creation_date) VALUES(?, ?, NOW())');
+        $req->execute(array($title, $content));
+        $addpost = $req->fetch();
+        
+  
+       return $addpost;
+        
+    }
+    
+    public function deletePost($id) {
+       $db = $this->dbConnect();
+       $deletepost= $db->prepare('DELETE FROM posts WHERE id=?');
+       $affectedLines = $deletepost->execute(array($id));
+       
+       return $affectedLines;
+    }
+    
+    public function updatePost($id, $title, $content) {
+        $db = $this->dbConnect();
+        $updatepost = $db->prepare('UPDATE posts SET title=?, content=? WHERE id=?');
+        $affectedLines = $updatepost->execute(array($title, $content,$id));
+        
+        return  $affectedLines;
+    }
+    public function findpostbyid($id)
+    {
+        $db = $this->dbConnect();
+        $findpost = $db->prepare('SELECT * FROM posts WHERE id=?');
+        $findpost->execute(array($id));
+        
+        return $findpost;
+    }
+    
 }

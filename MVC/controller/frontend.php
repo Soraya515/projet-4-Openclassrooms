@@ -25,6 +25,56 @@ function post()
     require ('view/frontend/postView.php');
 }
 
+function adminPosts()
+{
+    $PostManager = new \projetblogAlaska\MVC\Model\PostManager();
+    $allPosts = $PostManager->getPosts();
+
+    require ('view/frontend/adminPostsview.php');
+}
+
+function addPost($title, $content)
+{
+    $postManager = new \projetblogAlaska\MVC\Model\PostManager();
+    $addpost = $postManager->addPost($title, $content);
+
+    adminPosts();
+}
+
+function deletePost($id)
+{
+    $postManager = new \projetblogAlaska\MVC\Model\PostManager();
+    $deletepost = $postManager->deletePost($id);
+
+    adminPosts();
+}
+
+function UpdatePost($id, $title, $content)
+{
+    $postManager = new \projetblogAlaska\MVC\Model\PostManager();
+    $updatepost = $postManager->updatePost($id, $title, $content);
+
+    adminPosts();
+}
+
+function showUpdatePostForm($id)
+{
+    $postManager = new \projetblogAlaska\MVC\Model\PostManager();
+    $updatepost = $postManager->findpostbyid($id);
+    $resultat = $updatepost->fetch();
+    if ($resultat === false) {
+        throw new Exception('ID inconnu !');
+    } else {
+  
+    require ('view/frontend/adminUpdatepostView.php');
+    }
+}
+
+function showAddPostForm()
+{
+    require ('view/frontend/adminAddpostView.php');
+}
+
 function addComment($postId, $author, $comment)
 {
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
@@ -45,26 +95,26 @@ function deleteComment($id)
 
     adminComments();
 }
+
 function updateComment($id, $author, $comment)
 {
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
     $updatecomment = $commentManager->updateComment($id, $author, $comment);
-    
+
     adminComments();
 }
 
-function showUpdatecommentsform($id) 
+function showUpdatecommentsform($id)
 {
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
     $updatecomment = $commentManager->findCommentbyid($id);
     $resultat = $updatecomment->fetch();
-    
+
     if ($resultat === false) {
         throw new Exception('ID inconnu !');
     } else {
         require ('view/frontend/adminUpdateCommentView.php');
     }
-  
 }
 
 function sessionconnect($pseudo, $pass)
@@ -129,14 +179,6 @@ function inscription($pseudo, $email, $pass, $confirmation_pass)
 function showInscription()
 {
     require ('view/frontend/inscriptionView.php');
-}
-
-function adminlistsposts()
-{
-    $postManager = new \projetblogAlaska\MVC\Model\PostManager();
-    $posts = $postManager->getPosts();
-
-    require ('view/frontend/adminPostsview.php');
 }
 
 function adminComments()
