@@ -1,8 +1,8 @@
-<?php $title = 'Un article'; ?>
-
-<?php ob_start(); ?>
-
-
+<?php
+$title = 'Un article';
+$navigation_title = 'Blog Alaska';
+ob_start();
+?>
 
 <div class="texte">
 	<h3>

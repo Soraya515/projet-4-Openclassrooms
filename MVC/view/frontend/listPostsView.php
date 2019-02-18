@@ -1,6 +1,8 @@
-<?php $title = 'Mon blog'; ?>
-
-<?php ob_start(); ?>
+<?php 
+$title = 'liste des articles';
+$navigation_title = 'Blog Alaska';
+ob_start(); 
+?>
 
 <div class="jumbotron ">
   <div class="container" align="center">

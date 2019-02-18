@@ -16,14 +16,24 @@
     <div class="container-fluid ">
         <div class="navbar-header">
             <ul class="nav">
-                <li><a class="navbar-brand" href="index.php">Blog Alaska</a></li>
+                <li><a class="navbar-brand" href="index.php"><?= $navigation_title ?></a></li>
             </ul>
             
         </div>
         <ul class="nav navbar_nav" style="color:white">
 
-            <li><a href="#"><span class="fas fa-users fa-2x m-2" tabindex="0" data-toggle="tooltip" title="Connexion" style="color:white"></span></a></li>
-            <li><a href="#"><span class="fas fa-user-plus fa-2x m-2" style="color:white"></span></a></li>
+			<?php if(is_admin()) {?>
+				<li><a href="index.php?action=adminMembers"><span class="fas fa-user-alt fa-2x m-2" style= "color:white"></span></a></li>
+				<li><a href="index.php?action=adminposts"><span class="far fa-newspaper fa-2x m-2" style= "color:white"></span></a></li>
+                <li><a href="index.php?action=adminComments"><span class="fas fa-comments fa-2x m-2" style= "color:white"></span></a></li>
+			<?php }?>
+			<?php if(session_status() == PHP_SESSION_NONE) {?>
+			<li><a href="index.php?action=connexion"><span class="fas fa-users fa-2x m-2" tabindex="0" data-toggle="tooltip" title="Connexion" style="color:white"></span></a></li>
+			<li><a href="index.php?action=inscription"><span class="fas fa-user-plus fa-2x m-2" style="color:white"></span></a></li>
+			<?php }?>
+            <?php if(session_status() == PHP_SESSION_ACTIVE) {?>
+			<li><a href="index.php?action=deconnexion"><span class="fas fa-sign-out-alt fa-2x m-2" style="color:white"></span></a></li>
+			<?php }?>
             
         </ul>
     </div>

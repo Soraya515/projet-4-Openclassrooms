@@ -1,6 +1,10 @@
 <?php
 require ('controller/frontend.php');
 
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 try {
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -46,6 +50,11 @@ try {
                 } else {
                     showInscription();
                 }
+                break;
+            case "deconnexion":
+                $_SESSION = array();
+                session_destroy();
+                listPosts();
                 break;
             case "adminposts":
                 if (is_admin()) {

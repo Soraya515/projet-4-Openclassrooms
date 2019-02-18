@@ -128,7 +128,9 @@ function sessionconnect($pseudo, $pass)
     } else {
         $isPasswordCorrect = password_verify($pass, $resultat['pass']);
         if ($isPasswordCorrect === true) {
-            session_start();
+            if(session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
             $_SESSION['id'] = $resultat['id'];
             $_SESSION['pseudo'] = $pseudo;
             $_SESSION['access_level'] = $resultat['access_level'];
@@ -201,13 +203,11 @@ function adminComments()
 
 function is_admin()
 {
-    session_start();
     return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 1;
 }
 
 function is_member()
 {
-    session_start();
     return isset($_SESSION['access_level']) && $_SESSION['access_level'] == 2;
 }
 
