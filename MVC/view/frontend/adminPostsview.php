@@ -16,9 +16,10 @@
     <div class="container-fluid ">  
         <div class="navbar-header">
             <ul class="nav">
-                <a class="navbar-brand" href="#">Administration</a>
+                <li><a class="navbar-brand" href="#">Administration</a></li>
             </ul>
-        </div>
+            </div>
+        
         <ul class="nav navbar_nav ">
 
                 <li><a href="#"><span class="fas fa-home fa-2x m-2" style="color:white"></span></a></li>
@@ -26,14 +27,14 @@
                 <li><a href="#"><span class="fas fa-sign-out-alt fa-2x m-2" style="color:white"></span></a></li>
                 
             </ul>
-
+			</div>
 </nav>
 
 <table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Auteur</th>
+      <th scope="col">Titre</th>
       <th scope="col">Contenu</th>
       <th scope="col">Date de création</th>
       <th scope="col">Modifications</th>

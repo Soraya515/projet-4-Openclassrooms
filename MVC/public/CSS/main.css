@@ -1,28 +1,46 @@
 
-h1, h3
-{
-    text-align:center;
-}
-h3
-{
-    background-color:black;
-    color:white;
-    font-size:0.9em;
-    margin-bottom:0px;
-}
-.news p
-{
-    background-color:#CCCCCC;
-    margin-top:0px;
-}
-.news
-{
-    width:70%;
-    margin:auto;
-}
 
-a
-{
-    text-decoration: none;
-    color: blue;
+.jumbotron{
+	height: 100%;
+	background-image:url("/projetblogAlaska/MVC/images/Alaska1.jpg");
+	background-size:cover;
+	color:black;
+}
+.cardarticle{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+}
+.texte{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+    text-align: justify;
+    overflow: auto;
+    margin-top:20px;
+}
+.italique{
+	font-style:italic;
+	font-weight: lighter;
+}
+.cardcomment{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+	
+}
+.titre{
+	text-align:center;
+	text-decoration:underline;
+}
+.cardajoutcomment{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%
+	
+}
+.cardajoutmembre{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
 }

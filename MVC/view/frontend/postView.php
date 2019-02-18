@@ -1,56 +1,69 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Mon blog</title>
-        <link href="style.css" rel="stylesheet" /> 
-    </head>
-        
-    <body>
-        <h1>Mon super blog !</h1>
-        <p><a href="index.php">Retour à la liste des billets</a></p>
+<?php $title = 'Un article'; ?>
 
-        <div class="news">
-            <h3>
+<?php ob_start(); ?>
+
+
+
+<div class="texte">
+	<h3>
                 <?= htmlspecialchars($post['title']) ?>
-                <em>le <?= $post['creation_date_fr'] ?></em>
             </h3>
-            
-            <p>
+	<p class="italique">
+		<em>le <?= $post['creation_date_fr'] ?></em>
+	</p>
+
+	<p>
                 <?= nl2br(htmlspecialchars($post['content'])) ?>
             </p>
-        </div>
+</div>
 
-        <h2>Commentaires</h2>
+<h2 class="titre">Commentaires</h2>
+<br>
 
-        <?php
-        while ($comment = $comments->fetch()){
-        ?>
-            <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-            <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-            <p> <form action="reportComment.php" method="post">
-                <input type="hidden" name="comment_id" value="<?= $comment['id']?>">
-                <input type="submit" value="Signaler">
-            </form> </p>
-        <?php
-        }
-        ?>
+<?php
+while ($comment = $comments->fetch()) {
+    ?>
+<div class="card  cardcomment">
 
-<h2>Commentaires</h2>
+	<h4 class="card-header" align="center">
+		<strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?>
+            </h4>
+	<div class="card-body" align="center">
+		<p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+		<p>
+		
+		
+		<form action="reportComment.php" method="post">
+			<input type="hidden" name="comment_id" value="<?= $comment['id']?>">
+			<input type="submit" class="btn btn-primary" value="Signaler">
+		</form>
+	</div>
+</div>
+<?php
+}
+?>
+<br>
+<div class="card cardajoutcomment" align="center">
+	<div class="card-header" align="center">
+		<h2 class="titre">Ecrire un commentaire</h2>
+	</div>
+	<div class="card-body ">
+		<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>"
+			method="post">
+			<div class="form-group form-comment">
+				<label for="author">Auteur</label><br/> <input type="text"
+					id="author" name="author" />
+			</div>
+			<div class="form-group form-comment">
+				<label for="comment">Commentaire</label><br/>
+				<textarea id="comment" name="comment"></textarea>
+			</div>
+			<div class="form-group form-comment">
+				<input type="submit"class="btn btn-primary"/>
+			</div>
+		</form>
+	</div>
+	</div>
+<?php $content = ob_get_clean(); ?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
-    <div>
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" />
-    </div>
-    <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
-    </div>
-    <div>
-        <input type="submit" />
-    </div>
-</form>
-
-    </body>
-</html>
+<?php require('template.php'); ?>

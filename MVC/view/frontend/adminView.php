@@ -17,7 +17,7 @@
     <div class="container-fluid ">  
         <div class="navbar-header">
             <ul class="nav">
-                <a class="navbar-brand" href="#">Administration</a>
+                 <li><a class="navbar-brand" href="#">Administration</a></li>
             </ul>
         </div>
         <div>
