@@ -1,8 +1,8 @@
 
-<?php 
+<?php
 $title = 'inscription';
 $navigation_title = 'Blog Alaska';
-ob_start(); 
+ob_start();
 ?>
 
 <div class="container h-100">

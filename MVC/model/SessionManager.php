@@ -1,17 +1,18 @@
-<?php 
-
+<?php
 namespace projetblogAlaska\MVC\Model;
 
-
-require_once("model/Manager.php");
+require_once ("model/Manager.php");
 
 class SessionManager extends Manager
 {
+
     public function findUserByPseudo($pseudo)
     {
         $db = $this->dbConnect();
         $session = $db->prepare('SELECT id, pass, access_level FROM members WHERE pseudo=?');
-        $session->execute(array($pseudo));
+        $session->execute(array(
+            $pseudo
+        ));
 
         return $session;
     }
@@ -20,7 +21,9 @@ class SessionManager extends Manager
     {
         $db = $this->dbConnect();
         $session = $db->prepare('SELECT * FROM members WHERE id=?');
-        $session->execute(array($id));
+        $session->execute(array(
+            $id
+        ));
 
         return $session;
     }
@@ -39,17 +42,23 @@ class SessionManager extends Manager
         $db = $this->dbConnect();
         $password_hash = password_hash($pass, PASSWORD_DEFAULT);
         $addMember = $db->prepare('INSERT INTO members(pseudo, email, pass, inscription_date, access_level) VALUES(?, ?, ?, NOW(), ?)');
-        $affectedLines = $addMember->execute(array($pseudo, $email, $password_hash, $access_level));
+        $affectedLines = $addMember->execute(array(
+            $pseudo,
+            $email,
+            $password_hash,
+            $access_level
+        ));
 
-        return  $affectedLines;
+        return $affectedLines;
+    }
 
-    } 
-    
     public function deleteMember($id)
     {
         $db = $this->dbConnect();
         $deleteMember = $db->prepare('DELETE FROM members WHERE id=?');
-        $affectedLines = $deleteMember->execute(array($id)); 
+        $affectedLines = $deleteMember->execute(array(
+            $id
+        ));
         return $affectedLines;
     }
 
@@ -58,9 +67,15 @@ class SessionManager extends Manager
         $db = $this->dbConnect();
         $password_hash = password_hash($pass, PASSWORD_DEFAULT);
         $updateMember = $db->prepare('UPDATE members SET pseudo=?, email=?, pass=?, access_level=? WHERE id=?');
-        $affectedLines = $updateMember->execute(array($pseudo, $email, $password_hash, $access_level, $id));
+        $affectedLines = $updateMember->execute(array(
+            $pseudo,
+            $email,
+            $password_hash,
+            $access_level,
+            $id
+        ));
 
-        return  $affectedLines;
+        return $affectedLines;
     }
 }
 

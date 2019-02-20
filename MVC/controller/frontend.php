@@ -65,8 +65,8 @@ function showUpdatePostForm($id)
     if ($resultat === false) {
         throw new Exception('ID inconnu !');
     } else {
-  
-    require ('view/frontend/adminUpdatepostView.php');
+
+        require ('view/frontend/adminUpdatepostView.php');
     }
 }
 
@@ -128,7 +128,7 @@ function sessionconnect($pseudo, $pass)
     } else {
         $isPasswordCorrect = password_verify($pass, $resultat['pass']);
         if ($isPasswordCorrect === true) {
-            if(session_status() !== PHP_SESSION_ACTIVE) {
+            if (session_status() !== PHP_SESSION_ACTIVE) {
                 session_start();
             }
             $_SESSION['id'] = $resultat['id'];

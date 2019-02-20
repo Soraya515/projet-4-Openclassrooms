@@ -51,19 +51,19 @@ while ($comment = $comments->fetch()) {
 		<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>"
 			method="post">
 			<div class="form-group form-comment">
-				<label for="author">Auteur</label><br/> <input type="text"
+				<label for="author">Auteur</label><br /> <input type="text"
 					id="author" name="author" />
 			</div>
 			<div class="form-group form-comment">
-				<label for="comment">Commentaire</label><br/>
+				<label for="comment">Commentaire</label><br />
 				<textarea id="comment" name="comment"></textarea>
 			</div>
 			<div class="form-group form-comment">
-				<input type="submit"class="btn btn-primary"/>
+				<input type="submit" class="btn btn-primary" />
 			</div>
 		</form>
 	</div>
-	</div>
+</div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
