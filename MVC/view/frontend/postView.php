@@ -6,14 +6,14 @@ ob_start();
 
 <div class="texte">
 	<h3>
-                <?= htmlspecialchars($post['title']) ?>
+                <?= $post['title'] ?>
             </h3>
 	<p class="italique">
 		<em>le <?= $post['creation_date_fr'] ?></em>
 	</p>
 
 	<p>
-                <?= nl2br(htmlspecialchars($post['content'])) ?>
+                <?= nl2br($post['content']) ?>
             </p>
 </div>
 
@@ -33,7 +33,8 @@ while ($comment = $comments->fetch()) {
 		<p>
 		
 		
-		<form action="reportComment.php" method="post">
+		<form action="index.php?action=reportComment" method="post">
+			<input type="hidden" name="post_id" value="<?= $post['id'] ?>">
 			<input type="hidden" name="comment_id" value="<?= $comment['id']?>">
 			<input type="submit" class="btn btn-primary" value="Signaler">
 		</form>

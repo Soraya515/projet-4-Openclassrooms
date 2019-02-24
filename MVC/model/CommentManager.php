@@ -30,24 +30,25 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
-    public function isCommentAlreadyReported($postId)
+    public function isCommentAlreadyReported($commentId)
     {
         $db = $this->dbConnect();
         $reports = $db->prepare('SELECT COUNT(id) AS reportCount FROM reports WHERE comment_id = ? AND member_id = ?');
         $reports->execute(array(
-            $postId,
+            $commentId,
             $_SESSION['id']
         ));
         $reportCount = $reports->fetch();
         return $reportCount['reportCount'] > 0;
     }
 
-    public function reportComment($postId)
+    public function reportComment($commentId)
     {
+        
         $db = $this->dbConnect();
         $comments = $db->prepare('INSERT INTO reports(comment_id, member_id, date_report) VALUES(?, ?, NOW())');
         $affectedLines = $comments->execute(array(
-            $postId,
+            $commentId,
             $_SESSION['id']
         ));
 

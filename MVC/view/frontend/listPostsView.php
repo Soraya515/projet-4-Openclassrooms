@@ -17,12 +17,12 @@ while ($data = $posts->fetch()) {
 <div class="card cardarticle">
 
 	<h3 class="card-header" align="center">
-            <?= htmlspecialchars($data['title']) ?>
+            <?= $data['title'] ?>
             <em>le <?= $data['creation_date_fr'] ?></em>
 	</h3>
 	<div class="card-body">
 		<p>
-            <?= nl2br(htmlspecialchars($data['content'])) ?>
+            <?= nl2br($data['content']) ?>
             <br /> <em><a
 				href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
 

@@ -201,7 +201,13 @@ try {
                     listPosts();
                 }
                 break;
-                
+            case "reportComment":
+                if(isset($_POST['post_id']) && isset($_POST['comment_id'])) {
+                    reportComment($_POST['post_id'], $_POST['comment_id']);
+                }
+                else {
+                    listPosts();
+                }
                 
             default:
                 listPosts();

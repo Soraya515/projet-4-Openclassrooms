@@ -104,6 +104,14 @@ function updateComment($id, $author, $comment)
     adminComments();
 }
 
+function reportComment($post_id, $comment_id) {
+    $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();
+    if(!$commentManager->isCommentAlreadyReported($comment_id)) {
+        $reportComment = $commentManager->reportComment($comment_id);
+    }
+    header('Location:index.php?action=post&id=' . $post_id);
+}
+
 function showUpdatecommentsform($id)
 {
     $commentManager = new \projetblogAlaska\MVC\Model\CommentManager();

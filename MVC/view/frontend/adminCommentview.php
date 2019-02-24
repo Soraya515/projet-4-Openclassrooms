@@ -21,17 +21,24 @@ ob_start();
   <?php while ($comment = $allComments->fetch()){ ?>
     <tr>
 			<th scope="row"><?= $comment['id'];?></th>
-			<td><?= $comment['author'];?></td>
-			<td><?= $comment['comment'];?></td>
+			<td><?= htmlspecialchars($comment['author']);?></td>
+			<td><?= htmlspecialchars($comment['comment']);?></td>
 			<td><?= $comment['comment_date_fr'];?></td>
-			<td><?php
-
-if (array_key_exists($comment['id'], $allReportedarray)) {
-        echo $allReportedarray[$comment['id']];
-    } else {
-        echo '0';
-    }
-    ?></td>
+			<?php 
+			$hasReports = array_key_exists($comment['id'], $allReportedarray); 
+			echo '<td';
+			if($hasReports) {
+			    echo ' style="color:red;"';
+            }
+            echo '>';
+            if($hasReports) {
+                echo $allReportedarray[$comment['id']];
+            }
+            else {
+                echo '0';
+            }
+            echo '</td>';
+			?>
 			<td><a
 				href="index.php?action=updateCommentForm&id=<?= $comment['id'];?>"><i
 					class="fas fa-edit"></i></a> <a
